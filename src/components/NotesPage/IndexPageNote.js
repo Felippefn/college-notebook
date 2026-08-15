@@ -74,7 +74,7 @@ function IndexPageNote() {
   };
 
   return (
-    <Container className="mt-4">
+    <Container className="page">
       <Row className="align-items-center mb-3">
         <Col xs="auto">
           <GrLinkPrevious className = "back-button" onClick={() => {
@@ -86,15 +86,18 @@ function IndexPageNote() {
           }} />
         </Col>
         <Col>
-          <h1 >{topic} <Button onClick={() => {
-            if (window.confirm('Delete this item?')) {
-              DeleteNoteAndRefresh();
-            } else {
-              console.log('Cancellation confirmed');
-            }
-          }} className='btn-danger'>
-            Delete Note
-          </Button></h1>
+          <div className="page-header" style={{ margin: 0 }}>
+            <h1>{topic}</h1>
+            <Button onClick={() => {
+              if (window.confirm('Delete this item?')) {
+                DeleteNoteAndRefresh();
+              } else {
+                console.log('Cancellation confirmed');
+              }
+            }} className='btn-danger'>
+              Delete Note
+            </Button>
+          </div>
         </Col>
       </Row>
 
@@ -115,7 +118,6 @@ function IndexPageNote() {
               <h3
                 onClick={() => setIsEditingTitle(true)}
                 className="non-editing-text"
-                style={{ cursor: 'pointer' }}
               >
                 {title || 'Untitled Note'}
               </h3>
@@ -137,8 +139,7 @@ function IndexPageNote() {
             ) : (
               <p
                 onClick={() => setIsEditingContent(true)}
-                className="non-editing-text"
-                style={{ backgroundColor: 'transparent', padding: '10px', cursor: 'pointer', borderRadius: '5px' }}
+                className="non-editing-text card-surface"
               >
                 {content || 'No content available. Click to add.'}
               </p>

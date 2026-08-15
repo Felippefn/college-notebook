@@ -2,9 +2,9 @@ import React from 'react';
 
 function ToDoList() {
     return (
-        <div>
-            <h1 class="col">To Do List</h1>
-            {/* Add your add note content here */}
+        <div className="page">
+            <h1 className="title-page">To Do List</h1>
+            <p className="empty-state">Nothing here yet — check back soon.</p>
         </div>
     );
 }

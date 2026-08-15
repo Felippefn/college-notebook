@@ -72,136 +72,62 @@ function TopicNotesPageNote() {
   };
 
   return (
-    <div className='container'>
+    <div className='page'>
       < GrLinkPrevious onClick={() => navigate(-1)} className="back-button" />
-      <h1 style={{ margin: "20px" }}>
-        {topic}
+      <div className="page-header">
+        <h1>{topic}</h1>
         <Button onClick={() => {
           if (window.confirm('Delete this item?')) {
             DeleteTopicAndRefresh();
           }
-        }} className='btn-danger'>
-          <FaRegTrashAlt style={{ fontSize: "25px" }} />
+        }} className='btn-danger icon-btn'>
+          <FaRegTrashAlt style={{ fontSize: "18px" }} />
         </Button>
-        <Button onClick={handleAddTopic} className='btn-primary'><GrAdd fontSize={"25px"} /></Button>
-      </h1>
+        <Button onClick={handleAddTopic} className='btn-primary icon-btn'><GrAdd fontSize={"18px"} /></Button>
+      </div>
 
       {/* Form to add a new note */}
       {showAddTopic && (
-        <div style={{
-          margin: "20px 0",
-          padding: "20px",
-          width: "400px",
-          background: "transparent", // Light background for the form
-          borderRadius: "10px", // Rounded corners for the form
-        }}>
+        <div className="card-surface" style={{ padding: "20px", maxWidth: "480px", margin: "0 0 24px" }}>
           <input
             type="text"
             placeholder="Note title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            style={{
-              width: "100%", // Full-width input
-              padding: "10px", // Spacing inside the input
-              marginBottom: "10px", // Space between the input and textarea
-              borderRadius: "8px", // Rounded corners
-              border: "1px solid #ced4da", // Light grey border
-              fontSize: "16px" // Font size adjustment
-            }}
+            style={{ width: "100%", marginBottom: "10px" }}
           />
           <textarea
             placeholder="Note content"
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            style={{
-              width: "100%", // Full-width textarea
-              padding: "10px", // Spacing inside the textarea
-              marginBottom: "10px", // Space between textarea and buttons
-              borderRadius: "8px", // Rounded corners
-              border: "1px solid #ced4da", // Light grey border
-              fontSize: "16px", // Font size adjustment
-              resize: "vertical", // Allow vertical resizing only
-              minHeight: "100px" // Set a minimum height
-            }}
+            style={{ width: "100%", marginBottom: "10px", resize: "vertical", minHeight: "100px" }}
           />
-          <div style={{
-            display: "flex",
-            justifyContent: "flex-end", // Align buttons to the right
-            gap: "10px" // Space between buttons
-          }}>
-            <Button
-              variant="primary"
-              onClick={handleConfirmAddTopic}
-              style={{ padding: "10px 15px", borderRadius: "8px" }} // Button style adjustment
-            >
+          <div style={{ display: "flex", justifyContent: "flex-end", gap: "10px" }}>
+            <Button variant="primary" onClick={handleConfirmAddTopic}>
               Add Note
             </Button>
-            <Button
-              variant="secondary"
-              onClick={handleCancelAddTopic}
-              style={{ padding: "10px 15px", borderRadius: "8px" }} // Button style adjustment
-            >
+            <Button variant="secondary" onClick={handleCancelAddTopic}>
               Cancel
             </Button>
           </div>
         </div>
       )}
 
-
       {
         notes.length > 0 ? (
           notes.map(note => (
-            <div style={{
-              background: "#f8f9fa", // Lighter background for the card
-              boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)", // Soft shadow for depth
-              borderRadius: "12px",
-              width: "80%",
-              padding: "15px 20px", // Adjusted padding for spacing
-              margin: "15px auto", // Centered and spaced out divs
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between", // Space between title and date
-              transition: "transform 0.2s ease-in-out", // Hover effect
-              cursor: "pointer"
-            }}
-              key={note._id}
-              onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.02)"} // Slightly enlarge on hover
-              onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"} // Reset on hover leave
-            >
-              <a style={{
-                textDecoration: "none",
-                color: "#343a40", // Dark grey for text
-                display: "flex",
-                alignItems: "center",
-                flexGrow: 1 // Ensure flex for proper alignment
-              }}
-                href={`notes/${note._id}`}>
-                <FaPencilAlt
-                  style={{
-                    color: "#007bff", // Blue color for the icon
-                    marginRight: "10px"
-                  }}
-                />
-                <span style={{
-                  fontWeight: "bold", // Bold title
-                  fontSize: "18px", // Slightly smaller font size for a cleaner look
-                }}>
-                  {note.title}
-                </span>
+            <div className="note-card" key={note._id}>
+              <a href={`notes/${note._id}`}>
+                <FaPencilAlt />
+                <span className="note-title">{note.title}</span>
               </a>
-              <p style={{
-                color: "#6c757d", // Muted color for the date
-                marginLeft: "20px",
-                fontSize: "14px", // Smaller font for the date
-                textAlign: "right", // Align to the right
-                marginBottom: "0"
-              }}>
+              <p className="note-date">
                 Last updated: {formatDate(note.updatedAt)}
               </p>
             </div>
           ))
         ) : (
-          <p>No notes available.</p> // Handle the case when there are no notes
+          <p className="empty-state">No notes available.</p>
         )
       }
     </div >

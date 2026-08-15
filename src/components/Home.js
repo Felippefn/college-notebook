@@ -13,29 +13,28 @@ function Hello(){
 function Home() {
   return (
     <div>
-      <h1 className='title-page'>Welcome!</h1>
-      <div className="container">
-        <div className="row justify-content-center mb-5 mt-0">
-          <div className="alert alert-secondary alert-dismissible fade show col-3 text-center" role="alert">
+      <div className="page">
+        <h1 className='title-page'>Welcome!</h1>
+        <div className="d-flex justify-content-center mb-5 mt-3">
+          <div className="alert welcome-banner text-center" role="alert">
             <strong>{Hello()}</strong> Welcome to the first version of Basis, enjoy!
-            <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>
         </div>
-      </div>
-      <div className="container icons-home">
-        <div className="row">
-          <a href='/manage-notes' className="col tagHome">
-            <GrAdd fontSize={"100px"} />
-            <p>Manage Notes</p>
-          </a>
-          <a href='/schedule' className="col tagHome">
-            <GrSchedules fontSize={"100px"} />
-            <p>Check Schedule</p>
-          </a>
-          <a href='/todo-list' className="col tagHome">
-            <GrList fontSize={"100px"} />
-            <p>To-Do List</p>
-          </a>
+        <div className="icons-home">
+          <div className="row">
+            <a href='/manage-notes' className="tagHome">
+              <GrAdd fontSize={"64px"} />
+              <p>Manage Notes</p>
+            </a>
+            <a href='/schedule' className="tagHome">
+              <GrSchedules fontSize={"64px"} />
+              <p>Check Schedule</p>
+            </a>
+            <a href='/todo-list' className="tagHome">
+              <GrList fontSize={"64px"} />
+              <p>To-Do List</p>
+            </a>
+          </div>
         </div>
       </div>
     </div>

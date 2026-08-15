@@ -71,46 +71,44 @@ function Schedule() {
   };
 
   return (
-    <div>
-      <div className='container'>
-        <GrLinkPrevious onClick={() => navigate(-1)} className="back-button" />
-        <h1>{formatDate(currentDate)}</h1>
-        {/* Schedule Form */}
-        <div>
-          <input
-            type="text"
-            placeholder="Task"
-            value={task}
-            onChange={(e) => setTask(e.target.value)}
-          />
-          <input
-            type="time"
-            value={time}
-            onChange={(e) => setTime(e.target.value)}
-          />
-        </div>
-        <div className={`row mt-5 schedule-row`}>
-          {daysOfWeek.map((days, index) => (
-            <div className='col' id={days} key={index}>
-              <div className='schedule-row-dayWeek'>{days}</div>
+    <div className='page'>
+      <GrLinkPrevious onClick={() => navigate(-1)} className="back-button" />
+      <h1 className="schedule-header">{formatDate(currentDate)}</h1>
 
-              {/* Render schedules that match the current day */}
-              <ul style={{ padding: 0, margin: '5px 0 0 0' }}>
-                {schedules
-                  .filter(schedule => schedule.day === days) // Filter schedules by current day
-                  .map((schedule, scheduleIndex) => (
-                    <div className='task' key={scheduleIndex}>
-                    {schedule.task} - {schedule.time}
-                    </div>
-                  ))}
-              </ul>
+      <div className="schedule-toolbar">
+        <input
+          type="text"
+          placeholder="Task"
+          value={task}
+          onChange={(e) => setTask(e.target.value)}
+        />
+        <input
+          type="time"
+          value={time}
+          onChange={(e) => setTime(e.target.value)}
+        />
+      </div>
 
-              <Button onClick={() => handleAddSchedule(days)}>
-                <GrAdd />
-              </Button>
-            </div>
-          ))}
-        </div>
+      <div className="schedule-row">
+        {daysOfWeek.map((days, index) => (
+          <div className='col' id={days} key={index}>
+            <div className='schedule-row-dayWeek'>{days}</div>
+
+            <ul style={{ padding: 0, margin: '5px 0 0 0', listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              {schedules
+                .filter(schedule => schedule.day === days)
+                .map((schedule, scheduleIndex) => (
+                  <div className='task' key={scheduleIndex}>
+                  {schedule.task} - {schedule.time}
+                  </div>
+                ))}
+            </ul>
+
+            <Button className="icon-btn" style={{ alignSelf: 'center' }} onClick={() => handleAddSchedule(days)}>
+              <GrAdd />
+            </Button>
+          </div>
+        ))}
       </div>
     </div>
   );
